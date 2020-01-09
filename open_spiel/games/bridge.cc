@@ -246,6 +246,7 @@ std::string BridgeState::ObservationString(Player player) const {
       }
     }
     ptr += kNumCards;
+    // TODO: change Table to Declarer if dummy is on the play.
     absl::StrAppend(&rv, " Table:");
     for (int suit = kNumSuits - 1; suit >= 0; --suit) {
       if (suit != kNumSuits - 1) rv.push_back('.');
@@ -307,10 +308,13 @@ void BridgeState::ObservationTensor(Player player,
     for (int i = 0; i < kNumCards; ++i)
       if (holder_[i] == player) ptr[i] = 1;
     ptr += kNumCards;
-    // Dummy's remaining cards.
+    // If player is dummy, then store declarer's cards, otherwise store dummy's cards.
     const int dummy = contract_.declarer ^ 2;
+    int visible = dummy;
+    if (player == dummy) visible = contract_.declarer;
+    // Visible remaining cards.
     for (int i = 0; i < kNumCards; ++i)
-      if (holder_[i] == dummy) ptr[i] = 1;
+      if (holder_[i] == visible) ptr[i] = 1;
     ptr += kNumCards;
     // Indexing into history for recent tricks.
     int current_trick = num_cards_played_ / kNumPlayers;
