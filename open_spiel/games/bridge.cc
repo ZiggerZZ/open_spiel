@@ -246,8 +246,7 @@ std::string BridgeState::ObservationString(Player player) const {
       }
     }
     ptr += kNumCards;
-    // TODO: change Table to Declarer if dummy is on the play.
-    absl::StrAppend(&rv, " Table:");
+    absl::StrAppend(&rv, " Visible:");
     for (int suit = kNumSuits - 1; suit >= 0; --suit) {
       if (suit != kNumSuits - 1) rv.push_back('.');
       for (int rank = kNumCardsPerSuit - 1; rank >= 0; --rank) {
