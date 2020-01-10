@@ -166,7 +166,7 @@ rest) from any location, you will need to add to your PYTHONPATH the root
 directory and the `open_spiel` directory.
 
 When using a virtualenv, the following should be added to
-`<virtualenv>/bin/activate`. For a system-wide install, ddd it in your `.bashrc`
+`<virtualenv>/bin/activate`. For a system-wide install, add it in your `.bashrc`
 or `.profile`.
 
 ```bash
