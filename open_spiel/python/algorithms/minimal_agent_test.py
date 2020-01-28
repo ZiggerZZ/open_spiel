@@ -27,7 +27,7 @@ from open_spiel.python.algorithms import minimal_agent
 class MinimalAgentTest(absltest.TestCase):
 
   def test_step(self):
-    agent = random_agent.MinimalAgent(player_id=0, num_actions=10)
+    agent = minimal_agent.MinimalAgent(player_id=0, num_actions=10)
 
     legal_actions = [0, 2, 3, 5]
     time_step = rl_environment.TimeStep(
