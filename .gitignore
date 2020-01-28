@@ -22,6 +22,9 @@ build/
 dist/
 pyspiel.egg-info/
 
+ # Build testing
+.nox/
+
  # External git modules
 open_spiel/abseil-cpp/
 open_spiel/games/bridge/double_dummy_solver/
