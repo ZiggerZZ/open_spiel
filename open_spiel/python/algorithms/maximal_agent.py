@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""RL agent always choosing the minimal possible legal action."""
+"""RL agent always choosing the maximal possible legal action."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -22,10 +22,10 @@ import numpy as np
 from open_spiel.python import rl_agent
 
 
-class MinimalAgent(rl_agent.AbstractAgent):
+class MaximalAgent(rl_agent.AbstractAgent):
   """Minimal agent class."""
 
-  def __init__(self, player_id, num_actions, name="minimal_agent"):
+  def __init__(self, player_id, num_actions, name="maximal_agent"):
     assert num_actions > 0
     self._player_id = player_id
     self._num_actions = num_actions
@@ -35,9 +35,9 @@ class MinimalAgent(rl_agent.AbstractAgent):
     if time_step.last():
       return
 
-    # Pick the minimal legal action.
+    # Pick the maximal legal action.
     cur_legal_actions = time_step.observations["legal_actions"][self._player_id]
-    action = np.min(cur_legal_actions)
+    action = np.max(cur_legal_actions)
     probs = np.zeros(self._num_actions)
     probs[action] = 1.0
 
