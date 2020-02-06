@@ -19,7 +19,6 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import absltest
-import numpy as np
 from open_spiel.python import rl_environment
 from open_spiel.python.algorithms import maximal_agent
 
