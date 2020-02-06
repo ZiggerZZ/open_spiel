@@ -18,18 +18,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow.compat.v1 as tf
-
+from absl.testing import absltest
 from open_spiel.python import rl_environment
-from open_spiel.python.algorithms import dqn
-import pyspiel
+from open_spiel.python.algorithms import higher_agent
 
 
 class HigherAgentTest(absltest.TestCase):
 
   def test_step(self):
     player_id = 3
-    agent = minimal_agent.HigherAgent(player_id=player_id, num_actions=52)
+    agent = higher_agent.HigherAgent(player_id=player_id, num_actions=52)
     #     Vul: None
     #         S A
     #         H K964
@@ -55,4 +53,4 @@ class HigherAgentTest(absltest.TestCase):
     self.assertEqual(agent_output.action, 1)
 
 if __name__ == "__main__":
-  tf.test.main()
+  absltest.main()

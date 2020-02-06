@@ -38,9 +38,6 @@ def beat_or_play_lowest(cur_legal_actions, opponent_card):
 def permute_players(current_trick_us, current_trick_lh, current_trick_pd, current_trick_rh):
   return current_trick_pd, current_trick_rh, current_trick_us, current_trick_lh
 
-# def current_trick_cards(current_trick):
-
-
 
 class HigherAgent(rl_agent.AbstractAgent):
   """Higher agent class."""
