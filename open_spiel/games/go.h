@@ -49,7 +49,9 @@ inline constexpr int CellStates() { return 3; }  // Black, white, empty.
 inline constexpr double DrawUtility() { return 0; }
 
 // All actions must be in [0; NumDistinctActions).
-inline int NumDistinctActions(int board_size) { return kPass + 1; }
+inline int NumDistinctActions(int board_size) {
+  return board_size * board_size + 1;
+}
 
 // In theory Go games have no length limit, but we limit them to twice the
 // number of points on the board for practicality - only random games last
@@ -59,6 +61,9 @@ inline int MaxGameLength(int board_size) { return board_size * board_size * 2; }
 inline int ColorToPlayer(GoColor c) { return static_cast<int>(c); }
 
 // State of an in-play game.
+// Actions are contiguous from 0 to board_size * board_size - 1, row-major, i.e.
+// the (row, col) action is encoded as row * board_size + col.
+// The pass action is board_size * board_size.
 class GoState : public State {
  public:
   // Constructs a Go state for the empty board.
@@ -133,6 +138,10 @@ class GoGame : public Game {
     // Planes: black, white, empty, and a bias plane indicating komi (whether
     // white is to play).
     return {CellStates() + 1, board_size_, board_size_};
+  }
+
+  TensorLayout ObservationTensorLayout() const override{
+    return TensorLayout::kCHW;
   }
 
   int NumPlayers() const override { return go::NumPlayers(); }
