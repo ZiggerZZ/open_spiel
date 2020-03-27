@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Copyright 2019 DeepMind Technologies Ltd. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-set -x
+# Lint as: python3
+"""A test file for run_python_test.py."""
 
-if [ ! "$TRAVIS_USE_NOX" -eq 0 ]; then
-  # Build and run tests using nox
-  pip3 install nox
-  PWD=`pwd`  # normally defined, but just in case!
-  PYTHONPATH="$PYTHONPATH:$PWD:$PWD/build:$PWD/build/python" nox -s tests
-  exit 0
-fi
+import sys
 
-sudo -H pip3 install --upgrade pip
-sudo -H pip3 install --upgrade setuptools
-sudo -H pip3 install --force-reinstall virtualenv
+from absl import app
+from absl import flags
 
-virtualenv -p python3 ./venv
-source ./venv/bin/activate
+FLAGS = flags.FLAGS
+flags.DEFINE_string("print_value", "hello world", "String to print.")
+flags.DEFINE_integer("return_value", 0, "Return value for the process.")
 
-python3 --version
-pip3 install --upgrade -r requirements.txt -q
 
-./open_spiel/scripts/build_and_run_tests.sh
-deactivate
+def main(argv):
+  print("Num args:", len(argv))
+  print("argv[0]:", argv[0])
+  print("print_value:", FLAGS.print_value)
+  print("return_value:", FLAGS.return_value)
+  sys.exit(FLAGS.return_value)
+
+
+if __name__ == "__main__":
+  app.run(main)
