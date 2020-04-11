@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef THIRD_PARTY_OPEN_SPIEL_CANONICAL_GAME_STRINGS_H_
-#define THIRD_PARTY_OPEN_SPIEL_CANONICAL_GAME_STRINGS_H_
+#ifndef OPEN_SPIEL_CANONICAL_GAME_STRINGS_H_
+#define OPEN_SPIEL_CANONICAL_GAME_STRINGS_H_
 
 #include <string>
 
@@ -26,12 +26,12 @@ namespace open_spiel {
 // Heads-up Limit Texas Hold'em according to the ACPC:
 // http://www.computerpokercompetition.org/.
 // Valid values for betting_abstraction are "fc" for fold-call, and "fcpa" for
-// fold, call, pot, all-in. These indicate the actions that are allowed. Note
-// that in limit poker, "fcpa" is just the full game.
-// The string returned can be passed directly to LoadGame.
+// fold, call, pot, all-in. Use "fullgame" for the unabstracted game. These
+// indicate the actions that are allowed. Note that in limit poker, "fcpa" is
+// just the full game. The string returned can be passed directly to LoadGame.
 std::string HunlGameString(const std::string &betting_abstraction);
 std::string HulhGameString(const std::string &betting_abstraction);
 
 }  // namespace open_spiel
 
-#endif  // THIRD_PARTY_OPEN_SPIEL_SPIEL_H_
+#endif  // OPEN_SPIEL_SPIEL_H_

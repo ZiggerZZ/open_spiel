@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef THIRD_PARTY_OPEN_SPIEL_GAMES_TRADE_COMM_H_
-#define THIRD_PARTY_OPEN_SPIEL_GAMES_TRADE_COMM_H_
+#ifndef OPEN_SPIEL_GAMES_TRADE_COMM_H_
+#define OPEN_SPIEL_GAMES_TRADE_COMM_H_
 
 #include <memory>
 #include <random>
@@ -72,6 +72,8 @@ class TradeCommState : public State {
   bool IsTerminal() const override;
   std::vector<double> Returns() const override;
   std::string ObservationString(Player player) const override;
+  void ObservationTensor(Player player,
+                         std::vector<double>* values) const override;
 
   std::unique_ptr<State> Clone() const override;
   std::vector<Action> LegalActions() const override;
@@ -107,6 +109,7 @@ class TradeCommGame : public Game {
   std::shared_ptr<const Game> Clone() const override {
     return std::make_shared<const TradeCommGame>(*this);
   }
+  std::vector<int> ObservationTensorShape() const override;
 
  private:
   const int num_items_;
@@ -115,4 +118,4 @@ class TradeCommGame : public Game {
 }  // namespace trade_comm
 }  // namespace open_spiel
 
-#endif  // THIRD_PARTY_OPEN_SPIEL_GAMES_TRADE_COMM_H_
+#endif  // OPEN_SPIEL_GAMES_TRADE_COMM_H_
